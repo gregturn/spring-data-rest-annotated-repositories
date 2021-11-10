@@ -1,0 +1,17 @@
+== Read Me First
+
+To run this application, carry out these steps.
+
+1. Install Docker.
+2. Run Docker: `docker run -p 9042:9042 cassandra`. (Wait for it to come up. It can take over a minute).
+3. Run the application (either `./mvnw spring-boot:run` or inside the IDE).
+4. Check the endpoints using `curl localhost:8080/api/profiles`
+5. Edit `application.properties` and uncomment `spring.data.rest.detection-strategy=annotated` switching to annotation-based discovery.
+6. Restart this app (but leave the Docker instance of Cassandra running).
+7. Revisit the profiles with `curl localhost:8080/api/profiles`.
+8. Observe that `/users` endpoint has disappeared.
+9. Open `UserRepository` and add the `@RepositoryRestResource` annotation.
+10. Restart the application (again, leaving the Docker instance of Cassandra up).
+11. Verify that `/users` endpoint is back with `curl localhost:8080/api/profiles`.
+
+This verifies that Spring Data Cassandra + Spring Data REST works as expected whether or not you are using the default policy for exporting Spring Data REST, or if you switch to annotation-only.
